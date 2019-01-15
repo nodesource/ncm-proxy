@@ -1,0 +1,32 @@
+{
+  "name": "@nodesource/ncm-proxy",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": "nodesource/ncm-proxy",
+  "description": "Local Proxy for NCM 2.0",
+  "author": "NodeSource <npm@nodesource.com> (https://nodesource.com)",
+  "contributors": [
+    "Julian Gruber <julian.gruber@nodesource.com> (https://github.com/juliangruber)"
+  ],
+  "scripts": {
+    "start": "nodemon bin/ncm-proxy.js",
+    "test": "standard && tap test/*.js && npm run test:deps",
+    "test:deps": "dependency-check . --quiet && dependency-check . --quiet --unused --no-dev"
+  },
+  "bin": {
+    "ncm-proxy": "bin/ncm-proxy.js"
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "graphql-request": "^1.8.2",
+    "raw-body": "^2.3.2",
+    "simple-get": "^3.0.3"
+  },
+  "devDependencies": {
+    "dependency-check": "^3.3.0",
+    "node-fetch": "^2.1.2",
+    "nodemon": "^1.14.12",
+    "standard": "^10.0.3",
+    "tap": "^11.1.3"
+  }
+}
