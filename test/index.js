@@ -14,8 +14,8 @@ if (!token) {
 }
 
 const startProxy = ({
-  check: check = async () => true,
-  registryAddr: registryAddr = `http://localhost:${registry.address().port}`
+  check = async () => true,
+  registryAddr = `http://localhost:${registry.address().port}`
 } = {}) =>
   new Promise(resolve => {
     const proxy = new Proxy()
@@ -68,7 +68,7 @@ test('GET /:name', async t => {
     versions: {
       '1.0.0': {
         dist: {
-          tarball: `http://localhost:14313/name/-/name-1.0.0.tgz`
+          tarball: 'http://localhost:14313/name/-/name-1.0.0.tgz'
         }
       }
     }
@@ -102,7 +102,7 @@ test('trailing slash in registry url', async t => {
     versions: {
       '1.0.0': {
         dist: {
-          tarball: `http://localhost:14313/name/-/name-1.0.0.tgz`
+          tarball: 'http://localhost:14313/name/-/name-1.0.0.tgz'
         }
       }
     }
@@ -136,7 +136,7 @@ test('rewrite https to http', async t => {
     versions: {
       '1.0.0': {
         dist: {
-          tarball: `http://localhost:14313/name/-/name-1.0.0.tgz`
+          tarball: 'http://localhost:14313/name/-/name-1.0.0.tgz'
         }
       }
     }
@@ -169,7 +169,7 @@ test('GET /@:scope%2f:name', async t => {
     versions: {
       '1.0.0': {
         dist: {
-          tarball: `http://localhost:14313/@scope/name/-/name-1.0.0.tgz`
+          tarball: 'http://localhost:14313/@scope/name/-/name-1.0.0.tgz'
         }
       }
     }
