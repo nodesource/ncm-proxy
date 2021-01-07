@@ -5,7 +5,7 @@ const http = require('http')
 const get = require('simple-get')
 const EventEmitter = require('events')
 const graphql = require('./lib/graphql')
-const { resolve, URL } = require('url')
+const { URL } = require('url')
 const debug = require('debug')('ncm-proxy')
 const { promisify } = require('util')
 
@@ -153,8 +153,8 @@ class Proxy extends EventEmitter {
     ).value
     if (await this._check(pkg)) {
       const target = scope
-        ? resolve(this._registry, `${scope}/${name}/-/${name}-${version}.tgz`)
-        : resolve(this._registry, `${name}/-/${name}-${version}.tgz`)
+        ? new URL(`${scope}/${name}/-/${name}-${version}.tgz`, this._registry)
+        : new URL(`${name}/-/${name}-${version}.tgz`, this._registry)
       res.statusCode = 307
       res.setHeader('Location', target)
       res.end(target)
@@ -261,10 +261,12 @@ class Playback {
     this.resSrc = resSrc
     this.resDst = resDst
   }
+
   status () {
     this.resDst.statusCode = this.resSrc.statusCode
     return this
   }
+
   headers () {
     for (const [key, value] of Object.entries(this.resSrc.headers)) {
       // those wouldn't be true any more
@@ -274,10 +276,12 @@ class Playback {
     }
     return this
   }
+
   body () {
     this.resSrc.pipe(this.resDst)
     return this
   }
+
   all () {
     this.status().headers().body()
   }
